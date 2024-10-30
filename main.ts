@@ -1,11 +1,6 @@
-import HongImage from './ch02-bloom/hong-image';
-import bloom from './ch02-bloom/bloom';
+import bloomRun from './ch02-bloom';
+import circleRun from './ch03-raytracing'
 
-const hongImage = new HongImage('./ch02-bloom/bg.jpg');
+// bloomRun();
 
-hongImage.onLoad((hImg) => {
-  console.log(hongImage);
-  bloom.call(hongImage).run(0.3, 0.5);
-  // boxBlur5.call(hongImage).run();
-  // gausianBlur5.call(hongImage).run();
-});
+circleRun();

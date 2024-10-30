@@ -18,8 +18,7 @@ export default class HongImage {
 
   callback: ((hImg: HongImage) => void) | null = null;
 
-  constructor(path) {
-    this.img = new Image();
+  constructor(path: string) {
     this.width = 0;
     this.height = 0;
     this.imageData = null;
@@ -28,10 +27,12 @@ export default class HongImage {
     this.canvas = null;
     this.ctx = null;
     this.callback = null;
+    this.img = new Image();
     this.img.src = path;
   }
 
   async onLoad(callback) {
+
     if (!this.img) return;
     this.callback = callback;
     this.img.onload = () => {

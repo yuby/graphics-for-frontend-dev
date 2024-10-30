@@ -8,7 +8,6 @@ export default function bloom() {
     let weight = 1;
 
     const toDark = () => {
-      console.log(self);
       for (let y = 0; y <= self.height; y += 1) {
         for (let x = 0; x <= self.width; x += 1) {
           const { r, g, b, a } = self.getPixel(x, y);
@@ -42,7 +41,6 @@ export default function bloom() {
       run(th, wh) {
         threashold = th;
         weight = wh;
-        console.log(self)
 
 
         toDark();
