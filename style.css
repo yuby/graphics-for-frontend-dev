@@ -80,3 +80,7 @@ body {
 label {
     text-align: right;
 }
+
+#canvas {
+    border: 1px solid #ddd;
+}

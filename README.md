@@ -1,5 +1,1 @@
-# Graphics For FrontEnd Developers
-
-## Chapers
-
-- 01: read image
+A simple HTML/JS/CSS starter template
