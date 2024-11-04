@@ -1,6 +1,10 @@
 import bloomRun from './ch02-bloom';
-import circleRun from './ch03-raytracing'
+import {
+  CircleImageCoordinates,
+  CircleWorldCoordinates,
+  Sphere,
+  LightSphere,
+} from './ch03-raytracing'
 
+new LightSphere();
 // bloomRun();
-
-circleRun();
