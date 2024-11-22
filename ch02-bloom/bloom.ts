@@ -1,52 +1,80 @@
-import { gausianBlur5 } from './blur';
+import { GaussianBlur5 } from './Blur';
 
-export default function bloom() {
-    const clamp = (val, min, max) => Math.min(Math.max(val, min), max)
+const clamp = (val: number, min: number, max: number): number =>
+  Math.min(Math.max(val, min), max);
 
-    const self = this;
-    let threashold = 0;
-    let weight = 1;
+// Bloom effect class
+export class BloomEffect {
+  private self: any; // Replace 'any' with proper HongImage type
+  private threshold: number;
+  private weight: number;
+  private gaussianBlur: any; // Replace with proper type from previous implementation
 
-    const toDark = () => {
-      for (let y = 0; y <= self.height; y += 1) {
-        for (let x = 0; x <= self.width; x += 1) {
-          const { r, g, b, a } = self.getPixel(x, y);
-          const relativeLuminace = 0.2126 * (r / 255) + 0.7152 * (g / 255) + 0.0722 * (b / 255);
+  constructor(image: any) {
+    this.self = image;
+    this.threshold = 0;
+    this.weight = 1;
+    this.gaussianBlur = new GaussianBlur5(image);
+  }
 
-          if (relativeLuminace < threashold) {
-            self.swapPixel(x, y, 0, 0, 0, a);
-          }
+  private calculateRelativeLuminance(r: number, g: number, b: number): number {
+    return 0.2126 * (r / 255) + 0.7152 * (g / 255) + 0.0722 * (b / 255);
+  }
+
+  private applyDarkThreshold(): void {
+    for (let y = 0; y < this.self.height; y++) {
+      for (let x = 0; x < this.self.width; x++) {
+        const { r, g, b, a } = this.self.getPixel(x, y);
+        const relativeLuminance = this.calculateRelativeLuminance(r, g, b);
+
+        if (relativeLuminance < this.threshold) {
+          this.self.swapPixel(x, y, 0, 0, 0, a);
         }
-      }
-    }
-
-    const _bloom = () => {
-      for (let y = 0; y <= self.height; y += 1) {
-        for (let x = 0; x <= self.width; x += 1) {
-          const { r, g, b, a } = self.getPixel(x, y);
-          const { r: or, g: og, b: ob } = self.getOriginPixel(x, y);
-
-          const bloomR = clamp(r * weight + or, 0, 255);
-          const bloomG = clamp(g * weight + og, 0, 255);
-          const bloomB = clamp(b * weight + ob, 0, 255);
-
-          self.swapPixel(x, y, bloomR, bloomG, bloomB, a);
-        }
-      }
-    }
-
-
-
-    return {
-      run(th, wh) {
-        threashold = th;
-        weight = wh;
-
-
-        toDark();
-        gausianBlur5.call(self).run(20);
-        _bloom();
-        self.redraw();
       }
     }
   }
+
+  private applyBloom(): void {
+    for (let y = 0; y < this.self.height; y++) {
+      for (let x = 0; x < this.self.width; x++) {
+        const { r, g, b, a } = this.self.getPixel(x, y);
+        const originalPixel = this.self.getOriginPixel(x, y);
+
+        if (originalPixel && 'r' in originalPixel && 'g' in originalPixel && 'b' in originalPixel) {
+          const bloomR = clamp(r * this.weight + originalPixel.r, 0, 255);
+          const bloomG = clamp(g * this.weight + originalPixel.g, 0, 255);
+          const bloomB = clamp(b * this.weight + originalPixel.b, 0, 255);
+
+          this.self.swapPixel(x, y, bloomR, bloomG, bloomB, a);
+        }
+      }
+    }
+  }
+
+  public run(threshold: number = 0, weight: number = 1, blurIterations: number = 20): void {
+    this.threshold = threshold;
+    this.weight = weight;
+
+    this.applyDarkThreshold();
+    this.gaussianBlur.run(blurIterations);
+    this.applyBloom();
+    this.self.redraw();
+  }
+
+  // Getter/Setter methods for more control
+  public setThreshold(threshold: number): void {
+    this.threshold = clamp(threshold, 0, 1);
+  }
+
+  public setWeight(weight: number): void {
+    this.weight = weight;
+  }
+
+  public getThreshold(): number {
+    return this.threshold;
+  }
+
+  public getWeight(): number {
+    return this.weight;
+  }
+}

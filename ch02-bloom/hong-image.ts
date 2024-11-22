@@ -84,10 +84,10 @@ export default class HongImage {
 
   getOriginPixel(x, y) {
     if (!this.originImageData) return;
-    if (x < 0) x = 0;
-    if (x >= this.width) x = this.width - 1;
-    if (y < 0) y = 0;
-    if (y >= this.height) y = this.height - 1;
+    // if (x < 0) x = 0;
+    // if (x >= this.width) x = this.width - 1;
+    // if (y < 0) y = 0;
+    // if (y >= this.height) y = this.height - 1;
 
     const index = (y * this.width + x) * 4;
 
