@@ -1,6 +1,4 @@
 import { vec2, vec3, vec4 } from 'gl-matrix';
-import Hit from './Hit';
-import Ray from './Ray';
 
 export type SphereAttrs = {
   color: vec3;

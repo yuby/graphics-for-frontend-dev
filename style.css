@@ -72,7 +72,7 @@ label {
 .main {
   display: flex;
   flex: 1;
-  flex-direction: column;
+  flex-direction: row;
   position: fixed;
   top: 0;
   left: 0;
@@ -93,7 +93,7 @@ label {
 .canvas {
   display: flex;
   flex: 1;
-  background-color: #000;
+  background-color: #1e1e1e;
   justify-content: center;
   min-height: 520px;
   align-items: center;

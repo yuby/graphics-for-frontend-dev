@@ -75,12 +75,12 @@ export default class Controller {
     const blueControl = this.createControl('B', 0, 255, this.b);
     container.appendChild(blueControl);
 
-    console.log(this.radius);
     const radiusControl = this.createControl('Radius', this.radiusRange[0], this.radiusRange[1], this.radius);
     container.appendChild(radiusControl);
 
     document.body.appendChild(container);
   }
+
 
   createControl(label: string, min: number, max: number, value: number) {
     const callback = this.onChange;

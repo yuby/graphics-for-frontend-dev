@@ -1,5 +1,5 @@
-import { vec2, vec3, vec4 } from 'gl-matrix';
-import { SphereAttrs } from './sphere';
+import { vec3 } from 'gl-matrix';
+import { SphereAttrs } from './Sphere';
 
 export default class Controller {
   private center = vec3.fromValues(0, 0, 0);
@@ -119,11 +119,12 @@ export default class Controller {
   createControl(label: string, min: number, max: number, value: number) {
     const callback = this.onChange;
     const controlContainer = document.createElement('div');
-    controlContainer.style.marginBottom = '10px';
+    // controlContainer.style.marginBottom = '10px';
 
     const labelElement = document.createElement('div');
+    labelElement.style.fontSize = '12px';
     labelElement.textContent = `${label}: ${value}`;
-    labelElement.style.marginBottom = '5px';
+    // labelElement.style.marginBottom = '5px';
 
     const input = document.createElement('input');
     const key = label.toLowerCase();
@@ -133,7 +134,7 @@ export default class Controller {
     input.min = min.toString();
     input.max = max.toString();
     input.value = value.toString();
-    input.style.width = '200px';
+    // input.style.width = '200px';
 
     input.addEventListener('input', (e: Event) => {
       if (!e.target) return;

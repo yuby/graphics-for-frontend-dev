@@ -1,6 +1,4 @@
-import { vec2, vec3, vec4 } from 'gl-matrix';
-import Hit from './Hit';
-import Ray from './Ray';
+import { vec3 } from 'gl-matrix';
 
 export type SphereAttrs = {
   color: vec3;
@@ -15,10 +13,6 @@ export type SphereAttrs = {
 }
 
 export default class Sphere {
-  private center = vec3.create();
-
-  private radius = 0.5;
-
   attributes: SphereAttrs | null = null;
 
   getAttributes() {

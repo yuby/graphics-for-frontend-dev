@@ -1,6 +1,5 @@
 import Sphere, { SphereAttrs } from './Sphere';
 import Controller from './Controller';
-import { Raytracer } from './Raytracer';
 import Canvas from './Canvas';
 import { Sphere2DRenderer } from './Renderer'
 import type { RenderStrategy } from './Renderer';
@@ -10,8 +9,6 @@ export default class Circle {
   private sphere: Sphere;
 
   private controller:Controller;
-
-  private raytracer: Raytracer;
 
   private canvas: Canvas;
 
