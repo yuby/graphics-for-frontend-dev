@@ -2,7 +2,7 @@ import { vec3 } from 'gl-matrix';
 import { SphereAttrs } from './Sphere';
 
 export default class Controller {
-  private center = vec3.fromValues(0, 0, 0);
+  private center = vec3.fromValues(0, 0, 0.6);
 
   private light = vec3.fromValues(0, 0, 0);
 
